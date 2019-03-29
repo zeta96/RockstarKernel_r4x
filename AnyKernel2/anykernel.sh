@@ -49,7 +49,18 @@ if [ $(cat "/vendor/etc" | grep forceencypt | wc -l) -gt "0" ]; then
 	ui_print " "; ui_print "Force encryption is enabled";
 cp -rpf /tmp/anykernel/patch/fstab.tc.qcom /vendor/etc/fstab.qcom;
 
+
 fi;
+
+backup_file init.rc;
+	
+if [ $(cat "/vendor/etc" | grep forceencypt | wc -l) -gt "0" ]; then
+	ui_print " "; ui_print "Force encryption is enabled";
+cp -rpf /tmp/anykernel/patch/fstab.tc.qcom /vendor/etc/fstab.qcom;
+
+fi;
+
+
 # end ramdisk changes
 
 write_boot;
