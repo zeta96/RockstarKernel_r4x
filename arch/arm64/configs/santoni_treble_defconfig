@@ -602,8 +602,7 @@ CONFIG_CPU_FREQ_GOV_ELECTRON=y
 
 
 # CONFIG_CPU_FREQ_GOV_SCHED is not set
-
-#
+CONFIG_CPU_FREQ_GOV_BLU_ACTIVE=y
 # CPU frequency scaling drivers
 #
 # CONFIG_CPUFREQ_DT is not set
