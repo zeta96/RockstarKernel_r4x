@@ -149,7 +149,7 @@ savedpre="$LD_PRELOAD";
 unset LD_LIBRARY_PATH;
 unset LD_PRELOAD;
 
-ui_print "Installing CrappyKernel...";
+ui_print "Installing Rockstar Kernel...";
 for i in $($bb --list); do
   $bb ln -s $bb /tmp/anykernel/bin/$i;
 done;
