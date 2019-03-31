@@ -77,8 +77,10 @@ export TOOLCHAIN="$HOME/TC/aarch64-linux-gnu-8.x";
 export DEFCONFIG="santoni_treble_defconfig";
 export ZIP_DIR="${HOME}/${KERNELDIR}/files";
 export IMAGE="${OUTDIR}/arch/${ARCH}/boot/Image.gz";
+
 export NTDTB="${OUTDIR}/arch/${ARCH}/boot/dts/qcom/msm8940-pmi8950-qrd-sku7_S88536AA2.dtb";
-export TDTB="${OUTDIR}/arch/${ARCH}/boot/dts/qcom/msm8940-pmi8950-qrd-sku7_S88536AA2-treble.dtb";
+export TDTB="${OUTDIR}/arch/arm64/boot/dts/qcom/msm8940-pmi8950-qrd-sku7_S88536AA2-treble.dtb";
+
 export CHAT_ID="-1001344943713";
 export BOT_API_KEY="780524065:AAHoWvNA0Z3TrzNboNX3wUzUvHZpFLyUKb0"
 export CC=$HOME/dragontc/bin/clang
@@ -207,11 +209,10 @@ fi
 # ================
 echo -e "Copying kernel image";
 cp -v "${IMAGE}" "${ANYKERNEL}/kernel/Image.gz";
-cp -v "${NTDTB}" "${ANYKERNEL}/nontreble/${NTDTB}";
-cp -v "${TDTB}" "${ANYKERNEL}/treble/${TDTB}";
+cp -v "${NTDTB}" "${ANYKERNEL}/nontreble/nt.dtb";
+cp -v "${TDTB}" "${ANYKERNEL}/treble/t.dtb";
 cd -;
 cd ${ANYKERNEL};
-mv Image.gz-dtb zImage
 zip -r9 ${FINAL_ZIP} *;
 cd -;
  
