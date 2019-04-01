@@ -184,7 +184,8 @@ make -j$(nproc --all) O=out \
 	              KCFLAGS="$KCFLAGS" | tee build-log.txt ;
 
 else
-  ${MAKE} -j${JOBS}; 
+  ${MAKE} -j${JOBS} \ ARCH=arm64 \ CC=$HOME/toolchains/dragontc/bin/clang \ CLANG_TRIPLE=aarch64-linux-gnu- \ CROSS_COMPILE="$HOME/TC/aarch64-linux-gnu-8.x/bin/aarch64-linux-gnu-";
+
 fi
  
  
