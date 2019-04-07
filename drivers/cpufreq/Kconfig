@@ -252,6 +252,7 @@ config CPU_FREQ_DEFAULT_GOV_BARRY_ALLEN
 	  Use the CPUFreq governor 'barry_allen' as default. This allows
 	  you to get a full dynamic cpu frequency capable system by simply
 	  loading your cpufreq low-level hardware driver, using the
+
 	  'barry_allen' governor for latency-sensitive workloads.
 
 
@@ -285,6 +286,7 @@ config CPU_FREQ_DEFAULT_GOV_SAKURACTIVE
 	      performance governor.
 	      
 
+
 config CPU_FREQ_DEFAULT_GOV_IRONACTIVE
 	bool "ironactive"
 	select CPU_FREQ_GOV_IRONACTIVE
@@ -298,6 +300,26 @@ config CPU_FREQ_DEFAULT_GOV_CULTIVATION
 	select CPU_FREQ_GOV_CULTIVATION
 	help
 	Use the CPUFreq governor 'cultivation' as default.
+
+
+
+config CPU_FREQ_DEFAULT_GOV_ELECTRON
+	bool "electron"
+	select CPU_FREQ_GOV_ELECTRON
+	help
+	  Use the CPUFreq governor 'electron' as default. This allows
+	  you to get a full dynamic cpu frequency capable system by simply
+	  loading your cpufreq low-level hardware driver, using the
+	  'electron' governor for latency-sensitive workloads.
+
+config CPU_FREQ_DEFAULT_GOV_BLU_ACTIVE
+	bool "blu_active"
+	select CPU_FREQ_GOV_BLU_ACTIVE
+	help
+	  Use the CPUFreq governor 'blu_active' as default. This allows
+	  you to get a full dynamic cpu frequency capable system by simply
+	  loading your cpufreq low-level hardware driver, using the
+	  'interactive' governor for latency-sensitive workloads.
 
 
 
@@ -736,6 +758,13 @@ config CPU_FREQ_GOV_BARRY_ALLEN
 	  If in doubt, say N.
 
 
+config CPU_FREQ_GOV_ELECTRON
+	tristate "'electron' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'electron' - another tuned interactive with extra options
+
+
 config CPU_BOOST
 	tristate "Event base short term CPU freq boost"
 	depends on CPU_FREQ
@@ -744,6 +773,21 @@ config CPU_BOOST
 	  various events that might occur in the system. As of now, the
 	  events it reacts to are:
 	  - Migration of important threads from one CPU to another.
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_BLU_ACTIVE
+	tristate "'blu_active' cpufreq policy governor"
+	help
+	  'blu_active' - This driver adds a dynamic cpufreq policy governor
+	  designed for latency-sensitive workloads.
+
+	  This governor attempts to reduce the latency of clock
+	  increases so that the system is more responsive to
+	  interactive workloads.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called cpufreq_blu_active.
 
 	  If in doubt, say N.
 

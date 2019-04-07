@@ -56,7 +56,7 @@ MODULE_LICENSE("GPLv2");
 #define DT2W_DEBUG		0
 #define DT2W_DEFAULT		0
 
-#define DT2W_PWRKEY_DUR		60
+#define DT2W_PWRKEY_DUR		30
 #define DT2W_FEATHER		200
 #define DT2W_TIME		700
 
@@ -242,7 +242,7 @@ static void dt2w_input_event(struct input_handle *handle, unsigned int type,
 static int input_dev_filter(struct input_dev *dev) {
 	if (strstr(dev->name, "touch") ||
 		strstr(dev->name, "synaptics_dsx_i2c") ||
-		strstr(dev->name, "ft5x06_ts")) {
+		strstr(dev->name, "ft5x06_720p")) {
 		return 0;
 	} else {
 		return 1;
@@ -374,10 +374,10 @@ static int __init doubletap2wake_init(void)
 		goto err_input_dev;
 	}
 
-	dt2w_input_wq = create_workqueue("dt2wiwq");
+	dt2w_input_wq = alloc_workqueue("dt2wiwq", WQ_HIGHPRI | WQ_UNBOUND, 0);
 	if (!dt2w_input_wq) {
 		pr_err("%s: Failed to create dt2wiwq workqueue\n", __func__);
-		return -EFAULT;
+		return -ENOMEM;
 	}
 	INIT_WORK(&dt2w_input_work, dt2w_input_callback);
 	rc = input_register_handler(&dt2w_input_handler);

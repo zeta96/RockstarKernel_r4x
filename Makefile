@@ -1,6 +1,6 @@
 VERSION = 3
 PATCHLEVEL = 18
-SUBLEVEL = 137
+SUBLEVEL = 138
 EXTRAVERSION =
 NAME = Diseased Newt
 
@@ -678,6 +678,24 @@ KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 
 # Kill all maybe-uninitialized warnings
 KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_CFLAGS  += $(call cc-disable-warning, misleading-indentation)
+KBUILD_CFLAGS  += $(call cc-disable-warning, memset-elt-size)
+KBUILD_CFLAGS  += $(call cc-disable-warning, parentheses)
+KBUILD_CFLAGS  += $(call cc-disable-warning, bool-compare)
+KBUILD_CFLAGS  += $(call cc-disable-warning, bool-operation)
+KBUILD_CFLAGS += $(call cc-disable-warning, format-truncation)
+KBUILD_CFLAGS += $(call cc-disable-warning, format-overflow)
+KBUILD_CFLAGS += $(call cc-disable-warning, int-in-bool-context)
+KBUILD_CFLAGS += $(call cc-disable-warning, attribute-alias)
+KBUILD_CFLAGS  += $(call cc-disable-warning, duplicate-decl-specifier)
+KBUILD_CFLAGS  += $(call cc-disable-warning, switch-unreachable)
+KBUILD_CFLAGS  += $(call cc-disable-warning, array-bounds)
+KBUILD_CFLAGS  += $(call cc-disable-warning, stringop-overflow)
+KBUILD_CFLAGS  += $(call cc-disable-warning,incompatible-pointer-types) 
+KBUILD_CFLAGS  += $(call cc-disable-warning,unused-function)
+
+# Disable maybe-uninitialized warnings
+KBUILD_CFLAGS  += $(call cc-disable-warning,maybe-uninitialized,)
 
 # Disable unused-constant-variable warnings
 KBUILD_CFLAGS   += $(call cc-disable-warning,unused-const-variable,)
@@ -701,7 +719,7 @@ KBUILD_CFLAGS   += $(call cc-disable-warning,-Wno-typedef-redefinition)
 KBUILD_CFLAGS   += $(call cc-disable-warning,-Wno-parentheses-equality)
 KBUILD_CFLAGS   += $(call cc-disable-warning,-Wno-non-literal-null-conversion)
 KBUILD_CFLAGS   += $(call cc-disable-warning,-Wno-enum-conversion)
-
+KBUILD_CFLAGS   += $(call cc-disable-warning,-Wunused-function)
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= $(call cc-option,-Oz,-Os) $(call cc-disable-warning,maybe-uninitialized,)
