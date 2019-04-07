@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
- 
+export KERNELDIR="$HOME/RockstarKernel_r4x" 
 git config --global user.email "dhruvgera61@gmail.com"
 git config --global user.name "Dhruv"
  
@@ -184,7 +184,7 @@ make -j$(nproc --all) O=out \
 	              KCFLAGS="$KCFLAGS" | tee build-log.txt ;
 
 else
-  ${MAKE} -j${JOBS} \ ARCH=arm64 \ CC=$HOME/dhruv/RockstarKernel/dragontc/bin/clang \ CLANG_TRIPLE=aarch64-linux-gnu- \ CROSS_COMPILE="$HOME/TC/aarch64-linux-gnu-8.x/bin/aarch64-linux-gnu-";
+  ${MAKE} -j${JOBS} \ ARCH=arm64 \ CC=$HOME/RockstarKernel_r4x/dragontc/bin/clang \ CLANG_TRIPLE=aarch64-linux-gnu- \ CROSS_COMPILE="$HOME/TC/aarch64-linux-gnu-8.x/bin/aarch64-linux-gnu-";
 
 fi
  
