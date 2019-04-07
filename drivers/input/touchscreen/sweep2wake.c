@@ -82,7 +82,7 @@ MODULE_LICENSE("GPLv2");
 /* Resources */
 int s2w_switch = 0;
 static int s2w_debug = 0;
-static int s2w_pwrkey_dur = 60;
+static int s2w_pwrkey_dur = 30;
 static int touch_x = 0, touch_y = 0;
 static bool touch_x_called = false, touch_y_called = false;
 static bool exec_count = true;
@@ -254,7 +254,7 @@ static void s2w_input_event(struct input_handle *handle, unsigned int type,
 static int input_dev_filter(struct input_dev *dev) {
 	if (strstr(dev->name, "touch") ||
 		strstr(dev->name, "synaptics_dsx_i2c") ||
-		strstr(dev->name, "ft5x06_ts")) {
+		strstr(dev->name, "ft5x06_720p")) {
 		return 0;
 	} else {
 		return 1;
@@ -428,10 +428,10 @@ static int __init sweep2wake_init(void)
 		goto err_input_dev;
 	}
 
-	s2w_input_wq = create_workqueue("s2wiwq");
+	s2w_input_wq = alloc_workqueue("s2wiwq", WQ_HIGHPRI | WQ_UNBOUND, 0);
 	if (!s2w_input_wq) {
 		pr_err("%s: Failed to create s2wiwq workqueue\n", __func__);
-		return -EFAULT;
+		return -ENOMEM;
 	}
 	INIT_WORK(&s2w_input_work, s2w_input_callback);
 	rc = input_register_handler(&s2w_input_handler);
